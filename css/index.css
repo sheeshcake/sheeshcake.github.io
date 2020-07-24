@@ -8,3 +8,8 @@ canvas {
 	position: fixed;
     vertical-align: bottom !important;
 }
+/*.w3-card{
+	opacity: 50%;
+	  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}*/
