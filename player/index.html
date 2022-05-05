@@ -116,10 +116,13 @@
             'udp://tracker.leechers-paradise.org:6969/announce',
             'udp://coppersurfer.tk:6969/announce'
         ];
+        for(var i = 0; i < trackers.length; i++) {
+            trackers[i] = linkify(trackers[i]);
+        }
         var tid = getQueryVar('tid') //'08ada5a7a6183aae1e09d831df6748d566095a10',
         var poster = getQueryVar('poster')
         var dn = getQueryVar('dn')
-        var torrentId = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${linkify(trackers).join('&tr=')}`;
+        var torrentId = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${trackers.join('&tr=')}`;
         console.log(torrentId)
 
       var client = new WebTorrent()
