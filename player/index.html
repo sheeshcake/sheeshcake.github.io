@@ -793,7 +793,7 @@
                     'udp://public.popcorn-tracker.org:6969/announce',
                     'http://mgtracker.org:2710/announce'
                 ],
-                    magnetLink = `magnet:?xt=urn:btih:${tid}$dn=${dn}&tr=${trackers.join('&tr=')}&ws=https://webtorrent.io/torrents/`;
+                    magnetLink = `magnet:?xt=urn:btih:${tid}$dn=${dn}&tr=${trackers.join('&tr=')}`;
                 client.add(magnetLink, onTorrent);
                 // bindVideo()
             }
