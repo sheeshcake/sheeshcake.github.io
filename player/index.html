@@ -26,8 +26,8 @@
             left: 0;
         }
 
-        .mejs__button, .mejs__logo-button {
-            display: none;
+        #player > iframe > .mejs__logo-button {
+            display: none !important;
         }
 
     </style>
@@ -56,12 +56,13 @@
                 id: 'player',
                 width: '100%',
                 magnet: magnet,
+                features: {
+                    continue: false,
+                },
                 on: function (e) {
-                    if (e.name == window.webtor.INITED) {
-                        e.player.play();
-                        player.style.display = 'block';
-                        loading.style.display = 'none';
-                    }
+                    // if (e.name == window.webtor.INITED) {
+                    //     e.player.play();
+                    // }
                 },
             });
         }
