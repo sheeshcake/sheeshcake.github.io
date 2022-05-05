@@ -60,9 +60,12 @@
                     continue: false,
                 },
                 on: function (e) {
-                    // if (e.name == window.webtor.INITED) {
-                    //     e.player.play();
-                    // }
+                    if (e.name == window.webtor.TORRENT_FETCHED) {
+                        console.log('Torrent fetched!', e.data);
+                    }
+                    if (e.name == window.webtor.TORRENT_ERROR) {
+                        console.log('Torrent error!');
+                    }
                 },
             });
         }
