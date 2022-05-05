@@ -39,7 +39,7 @@
             'udp://tracker.leechers-paradise.org:6969/announce',
             'udp://coppersurfer.tk:6969/announce'
         ];
-        var magnet = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${linkify(trackers).join('&tr=')}`;
+        var magnet = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${trackers.join('&tr=')}`;
         function initPlayer() {
             window.webtor = window.webtor || [];
             window.webtor.push({
