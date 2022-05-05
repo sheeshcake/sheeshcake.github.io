@@ -56,9 +56,6 @@
                 id: 'player',
                 width: '100%',
                 magnet: magnet,
-                features: {
-                    continue: false,
-                },
                 on: function (e) {
                     if (e.name == window.webtor.TORRENT_FETCHED) {
                         console.log('Torrent fetched!', e.data);
