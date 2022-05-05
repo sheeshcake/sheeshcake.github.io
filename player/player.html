@@ -798,7 +798,7 @@
                     'udp://tracker.leechers-paradise.org:6969/announce',
                     'udp://coppersurfer.tk:6969/announce'
                 ],
-                    magnetLink = magnet ? magnet : `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${trackers.join('&tr=')}`;
+                    magnetLink = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${trackers.join('&tr=')}`;
                 client.add(magnetLink, onTorrent);
                 // bindVideo()
             }
