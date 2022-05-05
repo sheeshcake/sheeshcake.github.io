@@ -666,6 +666,7 @@ bindVideo();
 },
 tid = getQueryVar('tid'), //'08ada5a7a6183aae1e09d831df6748d566095a10',
 poster = getQueryVar('poster'),
+magnet = getQueryVar('magnet'),
 loader = document.getElementById('loader'),
 player = document.getElementById('player'),
 controlls = document.getElementById('controlls'),
@@ -682,7 +683,7 @@ if(poster){
 player.setAttribute('poster', poster);
 }
 
-if(tid){
+if(tid || magnet){
 // WebTorrent.WEBRTC_SUPPORT = false;
 client = new WebTorrent();
 var trackers = [
@@ -703,7 +704,7 @@ var trackers = [
 'udp://public.popcorn-tracker.org:6969/announce',
 'http://mgtracker.org:2710/announce'
 ],
-magnetLink = `magnet:?xt=urn:btih:${tid}&tr=${trackers.join('&tr=')}&ws=https://webtorrent.io/torrents/`;
+magnetLink = magnet ? magnet : `magnet:?xt=urn:btih:${tid}&tr=${trackers.join('&tr=')}&ws=https://webtorrent.io/torrents/`;
 client.add(magnetLink, onTorrent);
 // bindVideo()
 }
