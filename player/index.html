@@ -101,7 +101,8 @@
         ];
         var tid = getQueryVar('tid') //'08ada5a7a6183aae1e09d831df6748d566095a10',
         var poster = getQueryVar('poster')
-        var torrentId = `magnet:?xt=urn:btih:${tid}&tr=${trackers.join('&tr=')}`;
+        var dn = getQueryVar('dn')
+        var torrentId = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${trackers.join('&tr=')}`;
     //   var torrentId = 'https://1337xx.to/torrent/5227963/Uncharted-2022-1080p-WEBRip-x265/'
 
       var client = new WebTorrent()
