@@ -83,7 +83,34 @@
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
 
     <script>
-      var torrentId = 'https://1337xx.to/torrent/5227963/Uncharted-2022-1080p-WEBRip-x265/'
+        getQueryVar = (varName) => {
+            var queryStr = unescape(window.location.search) +'&',
+            regex = new RegExp('.*?[&\\?]'+ varName +'=(.*?)&.*'),
+            val = queryStr.replace(regex, "$1");
+            return val === queryStr ? false : val;
+        }
+        var trackers = [
+            'udp://explodie.org:6969',
+            'udp://tracker.empire-js.us:1337',
+            'wss://tracker.btorrent.xyz',
+            'wss://tracker.sloppyta.co:443/announce',
+            'wss://tracker.openwebtorrent.com',
+            'udp://glotorrents.pw:6969/announce',
+            'udp://tracker.opentrackr.org:1337/announce',
+            'udp://torrent.gresille.org:80/announce',
+            'udp://tracker.openbittorrent.com:80',
+            'udp://tracker.coppersurfer.tk:6969',
+            'udp://tracker.leechers-paradise.org:6969',
+            'udp://p4p.arenabg.ch:1337',
+            'udp://tracker.internetwarriors.net:1337',
+            'udp://open.demonii.com:1337/announce',
+            'udp://public.popcorn-tracker.org:6969/announce',
+            'http://mgtracker.org:2710/announce'
+        ];
+        var tid = getQueryVar('tid') //'08ada5a7a6183aae1e09d831df6748d566095a10',
+        var poster = getQueryVar('poster')
+        var torrentId = `magnet:?xt=urn:btih:${tid}&tr=${trackers.join('&tr=')}`;
+    //   var torrentId = 'https://1337xx.to/torrent/5227963/Uncharted-2022-1080p-WEBRip-x265/'
 
       var client = new WebTorrent()
 
