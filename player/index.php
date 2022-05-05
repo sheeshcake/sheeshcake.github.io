@@ -798,7 +798,7 @@
                     'udp://tracker.leechers-paradise.org:6969/announce',
                     'udp://coppersurfer.tk:6969/announce'
                 ],
-                    magnetLink = <? $_POST["magnet"] ?>;
+                    magnetLink = <? echo $_POST["magnet"] || 'magnet:?xt=urn:btih:477C83C6981D5F025EF91143C7C0A5622DB29823&dn=Uncharted.2022.1080p.WEBRip.x265&tr=http%3A%2F%2Ftracker.trackerfix.com%3A80%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2830%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2970%2Fannounce&tr=udp%3A%2F%2Ftracker.slowcheetah.org%3A14710%2Fannounce&tr=udp%3A%2F%2Ftracker.tallpenguin.org%3A15730%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fcoppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zer0day.to%3A1337%2Fannounce'; ?>;
                 client.add(magnetLink, onTorrent);
                 // bindVideo()
             }
