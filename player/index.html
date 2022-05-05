@@ -12,18 +12,14 @@
     <button id="button">Play</button>
     <div id="player"></div>
     <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>
-    <script>
-        var button = document.getElementById('button');
-        var player = document.getElementById('player');
-        var loading = document.getElementById('loading');
-        player.style.display = 'none';
-        loading.style.display = 'none';
 
-        button.addEventListener('click', function () {
-            button.style.display = 'none';
-            loading.style.display = 'block';
-            initPlayer();
-        });
+    <style>
+        .mejs__button, .mejs__logo-button {
+            display: none;
+        }
+    </style>
+    <script>
+        initPlayer();
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
