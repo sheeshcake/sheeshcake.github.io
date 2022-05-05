@@ -89,23 +89,21 @@
             val = queryStr.replace(regex, "$1");
             return val === queryStr ? false : val;
         }
-        // var trackers = [
-        //     'http://tracker.trackerfix.com:80/announce',
-        //     'udp://9.rarbg.me:2720/announce',
-        //     'udp://9.rarbg.to:2900/announce',
-        //     'udp://tracker.thinelephant.org:12710/announce',
-        //     'udp://tracker.slowcheetah.org:14780/announce',
-        //     'udp://tracker.zer0day.to:1337/announce',
-        //     'udp://tracker.leechers-paradise.org:6969/announce',
-        //     'udp://coppersurfer.tk:6969/announce'
-        // ];
+        var trackers = [
+            'http://tracker.trackerfix.com:80/announce',
+            'udp://9.rarbg.me:2720/announce',
+            'udp://9.rarbg.to:2900/announce',
+            'udp://tracker.thinelephant.org:12710/announce',
+            'udp://tracker.slowcheetah.org:14780/announce',
+            'udp://tracker.zer0day.to:1337/announce',
+            'udp://tracker.leechers-paradise.org:6969/announce',
+            'udp://coppersurfer.tk:6969/announce'
+        ];
         var tid = getQueryVar('tid') //'08ada5a7a6183aae1e09d831df6748d566095a10',
-        // var poster = getQueryVar('poster')
-        // var dn = getQueryVar('dn')
-        // var torrentId = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${trackers.join('&tr=')}`;
-        // console.log(torrentId)
-    //   var torrentId = 'https://1337xx.to/torrent/5227963/Uncharted-2022-1080p-WEBRip-x265/'
-        var torrentId = '477C83C6981D5F025EF91143C7C0A5622DB29823';
+        var poster = getQueryVar('poster')
+        var dn = getQueryVar('dn')
+        var torrentId = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${trackers.join('&tr=')}`;
+        console.log(torrentId)
 
       var client = new WebTorrent()
 
