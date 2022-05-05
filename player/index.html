@@ -32,7 +32,7 @@
 
     </style>
     <script>
-        initPlayer();
+        
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -49,6 +49,7 @@
             'udp://coppersurfer.tk:6969/announce'
         ];
         var magnet = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${trackers.join('&tr=')}`;
+        initPlayer();
         function initPlayer() {
             window.webtor = window.webtor || [];
             window.webtor.push({
