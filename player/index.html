@@ -103,6 +103,7 @@
         var poster = getQueryVar('poster')
         var dn = getQueryVar('dn')
         var torrentId = `magnet:?xt=urn:btih:${tid}&dn=${dn}&tr=${trackers.join('&tr=')}`;
+        console.log(torrentId)
     //   var torrentId = 'https://1337xx.to/torrent/5227963/Uncharted-2022-1080p-WEBRip-x265/'
 
       var client = new WebTorrent()
