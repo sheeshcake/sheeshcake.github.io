@@ -1,8 +1,2 @@
 node_modules
-build
-coverage
-.vscode
-.DS_STORE
-.env
-tmp
-/user_datas
+package-lock.json

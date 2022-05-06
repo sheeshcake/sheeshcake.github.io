@@ -1,171 +1,189 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<title>Wendale Dy</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script type="text/javascript" src="js/particles.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebTorrentPlayer Example</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="lib/webtorrent-player.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="docs/logo.png">
+  <style>
+    :root {
+      font-size: 12px;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #141416;
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
 </head>
-<body class="w3-grey" id="main">
-<div id="particles-js"></div>
-	<!-- Page Container -->
-	<div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-	  <!-- The Grid -->
-	  <div class="w3-row-padding">
-	  
-	    <!-- Left Column -->
-	    <div class="w3-third">
-	    
-	      <div class="w3-white w3-text-grey w3-card-4">
-	        <div class="w3-display-container">
-	          <img src="assets/profile.jpg" style="width:100%" alt="Avatar">
-	          <div class="w3-display-bottomleft w3-container w3-text-black">
-	            <h2>Wendale Franz Dy</h2>
-	          </div>
-	        </div>
-	        <div class="w3-container">
-	          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Programmer</p>
-	          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Iligan City, Philippines</p>
-	          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>spooderm5@gmail.com</p>
-	          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>09058934974</p>
-	          <hr>
+<body>
+  <span id=navNowPlaying></span>
+  <section id="player" class="torrent-player">
+    <video id="video" src=""></video>
+    <a href="#player" class="miniplayer"></a>
+    <div class="top">
+      <div data-name="nowPlaying" class="ctrl">
+      </div>
+      <div class='stats'>
+        <span class="ctrl material-icons" data-value="0" data-name="peers">
+          people
+        </span>
+        <span class="ctrl material-icons" data-value="0 B/s" data-name="downSpeed">
+          arrow_downward
+        </span>
+        <span class="ctrl material-icons" data-value="0 B/s" data-name="upSpeed">
+          arrow_upward
+        </span>
+      </div>
+      <a class="material-icons ctrl" title="Save File To Drive" data-name="downloadFile" href="" target="_blank">
+        get_app
+      </a>
+    </div>
+    <div class="middle">
+      <div class="ctrl" data-name="ppToggle"></div>
+      <span class="material-icons ctrl" data-name="playLast">
+        skip_previous
+      </span>
+      <span class="material-icons ctrl" data-name="rewind">
+        fast_rewind
+      </span>
+      <span class="material-icons ctrl" data-name="playPause">
+        play_arrow
+      </span>
+      <span class="material-icons ctrl" data-name="forward">
+        fast_forward
+      </span>
+      <span class="material-icons ctrl" data-name="playNext">
+        skip_next
+      </span>
+      <div data-name="bufferingDisplay">
+      </div>
+    </div>
+    <div class="bottom">
+      <span class="material-icons ctrl" title="Play/Pause [Space]" data-name="playPause">
+        play_arrow
+      </span>
+      <span class="material-icons ctrl" title="Next [N]" data-name="playNext">
+        skip_next
+      </span>
+      <span class="material-icons ctrl" title="Playlist [P]" data-name="openPlaylist">
+        playlist_play
+      </span>
+      <div class="volume">
+        <span class="material-icons ctrl" title="Mute [M]" data-name="toggleMute">
+          volume_up
+        </span>
+        <input class="ctrl" type="range" value="100" id="volume" step="any" data-name="setVolume">
+      </div>
+      <div class="audio-tracks popup">
+        <span class="material-icons ctrl" title="Audio Tracks [T]" disabled data-name="audioButton">
+          queue_music
+        </span>
+        <div class="popup-menu ctrl" data-name="selectAudio">
+        </div>
+      </div>
+      <div class="ctrl" data-name="progressWrapper" data-elapsed="00:00" data-remaining="00:00">
+        <div>
+          <input class="ctrl" type="range" min="0" max="100" value="0" step="any" data-name="setProgress">
+          <img class="ctrl" data-elapsed="00:00" data-name="thumbnail">
+        </div>
+      </div>
+      <div class="subtitles popup">
+        <span class="material-icons ctrl" title="Subtitles [C]" disabled data-name="captionsButton">
+          subtitles
+        </span>
+        <div class="popup-menu ctrl" data-name="selectCaptions">
+        </div>
+      </div>
+      <span class="material-icons ctrl" title="Cast Video [P]" data-name="toggleCast" disabled>
+        cast
+      </span>
+      <span class="material-icons ctrl" title="Popout Window [P]" data-name="togglePopout">
+        picture_in_picture
+      </span>
+      <span class="material-icons ctrl" title="Theatre Mode [T]" data-name="toggleTheatre">
+        crop_16_9
+      </span>
+      <span class="material-icons ctrl" title="Fullscreen [F]" data-name="toggleFullscreen">
+        fullscreen
+      </span>
+    </div>
+  </section>
+  <button type="button" onclick=t(1)>Play Sintel</button>
+  <button type="button" onclick=t(2)>Play Tears Of Steel</button>
+  <button type="button" onclick=d(1)>Download and store Sintel</button>
+  <button type="button" onclick=d(2)>Download and store Tears Of Steel</button>
+  <input type="text" id='magn' placeholder="Magnet/Torrent">
+  <button type="button" onclick=client.playTorrent(magn.value)>Play Magnet/Torrent</button>
 
-	          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
-	          <p>Web Development</p>
-	          <div class="w3-light-grey w3-round-xlarge w3-small">
-	            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:60%">60%</div>
-	          </div>
-	          <p>UI/UX Design</p>
-	          <div class="w3-light-grey w3-round-xlarge w3-small">
-	            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">
-	              <div class="w3-center w3-text-white">50%</div>
-	            </div>
-	          </div>
-	          <p>Illustrator</p>
-	          <div class="w3-light-grey w3-round-xlarge w3-small">
-	            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:20%">20%</div>
-	          </div>
-	          <p>Game Development</p>
-	          <div class="w3-light-grey w3-round-xlarge w3-small">
-	            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:30%">30%</div>
-	          </div>
-	          <br>
+  <script src="dist/bundle.js"></script>
+  <script>
+    const playerControls = {}
+    for (const item of document.getElementsByClassName('ctrl')) {
+      if (!playerControls[item.dataset.name]) {
+        playerControls[item.dataset.name] = item
+      } else {
+        playerControls[item.dataset.name] = [playerControls[item.dataset.name], item]
+      }
+    }
+    const client = new WebTorrentPlayer.default({
+      controls: playerControls,
+      video: video,
+      player: player,
+      burnIn: true,
+      seekTime: 2,
+      immerseTime: 10,
+      generateThumbnails: true,
+      visibilityLossPause: true
+    })
+    client.on('prev', params => console.log('User wants to play previous video!', params))
+    client.on('next', params => console.log('User wants to play next video!', params))
+    client.on('playlist', params => console.log('User wants to open playlist!', params))
+    client.on('watched', params => console.log('User watched current video!', params))
+    client.on('download-done', params => console.log('Player finished downloading a file!', params))
+    client.on('video-files', params => console.log('Player found video files!', params))
+    client.on('offline-torrent', params => console.log('Player loaded an offline stored torrent!', params))
+    client.on('no-files', params => console.error('Player couldnt find any playable video files!', params))
+    client.on('no-peers', params => console.error('Player couldnt find any peers!', params))
 
-	          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
-	          <p>English</p>
-	          <div class="w3-light-grey w3-round-xlarge">
-	            <div class="w3-round-xlarge w3-teal" style="height:24px;width:50%"></div>
-	          </div>
-	          <p>Tagalog</p>
-	          <div class="w3-light-grey w3-round-xlarge">
-	            <div class="w3-round-xlarge w3-teal" style="height:24px;width:80%"></div>
-	          </div>
-	          <p>Bisaya</p>
-	          <div class="w3-light-grey w3-round-xlarge">
-	            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
-	          </div>
-	          <br>
-	        </div>
-	      </div><br>
+    function d(a) {
+      switch (a) {
+        case 1:
+          client.offlineDownload('magnet:?xt=urn:btih:08ada5a7a6183aae1e09d831df6748d566095a10&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F&xs=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel.torrent')
+          break
+        case 2:
+          client.offlineDownload('magnet:?xt=urn:btih:209c8226b299b308beaf2b9cd3fb49212dbd13ec&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F&xs=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Ftears-of-steel.torrent')
+          break
+        case 3:
+          client.offlineDownload('magnet:?xt=urn:btih:CE9156EB497762F8B7577B71C0647A4B0C3423E1&tr=wss%3A%2F%2Ftracker.openwebtorrent.com')
+          break
+      }
+    }
 
-	    <!-- End Left Column -->
-	    </div>
-
-	    <!-- Right Column -->
-	    <div class="w3-twothird">
-	    
-	      <div class="w3-container w3-card w3-white w3-margin-bottom">
-	        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Work Experience</h2>
-	        <div class="w3-container">
-	          <h5 class="w3-opacity"><b>Service Crew Alrose</b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Sept 2019 - Nov 2019</h6>
-	          <p>Lorem ipsum dolor sit amet. Praesentium magnam cndus iure, iste.</ponsectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repelle>
-	          <hr>
-	        </div>
-	        <div class="w3-container">
-	          <h5 class="w3-opacity"><b>Front End Developer / Pylon</b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jul 2020 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
-	          <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
-	          <hr>
-	        </div>
-	        <div class="w3-container">
-	          <h5 class="w3-opacity"><b>Web Developer / Pylon</b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jul 2020 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
-	          <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
-	          <hr>
-	        </div>
-	        <div class="w3-container">
-	          <h5 class="w3-opacity"><b>Game Developer / HalfByte</b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2018 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
-	          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><br>
-	        </div>
-	      </div>
-
-	      <div class="w3-container w3-card w3-white w3-margin-bottom">
-	        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
-	        <div class="w3-container">
-	          <h5 class="w3-opacity"><b>MSU-IIT</b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2014-2015</h6>
-	          <p>Electronics Engineering Technology</p>
-	          <hr>
-	        </div>
-	<!--         <div class="w3-container">
-	          <h5 class="w3-opacity"><b>London Business School</b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
-	          <p>Master Degree</p>
-	          <hr>
-	        </div> -->
-	        <div class="w3-container">
-	          <h5 class="w3-opacity"><b>St. Michael's College, Iligan City </b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2016 - 2020</h6>
-	          <p>Bachelor of Science in Computer Science(Undergraduate)</p><br>
-	        </div>
-	      </div>
-
-		<div class="w3-container w3-card w3-white w3-margin-bottom">
-	        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-lightbulb-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Projects</h2>
-	        <div class="w3-container">
-	          <h5 class="w3-opacity"><b>BFP-Reporter App</b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-pencil fa-fw w3-margin-right"></i>Written in PHP,JS</h6>
-	          <p>Lorem ipsum dolor sit amet. Praesentium magnam cndus iure, iste.</ponsectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repelle>
-	          <hr>
-	        </div>
-	        <div class="w3-container">
-	          <h5 class="w3-opacity"><b>Mangrove Monitor(GIS)</b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-pencil fa-fw w3-margin-right"></i>Written in PHP,JS</h6>
-	          <p>Lorem ipsum dolor sit amet. Praesentium magnam cndus iure, iste.</ponsectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repelle>
-	          <hr>
-	        </div>
-	        <div class="w3-container">
-	          <h5 class="w3-opacity"><b>CMDYTPD(CMD Youtube Player and Downloader)</b></h5>
-	          <h6 class="w3-text-teal"><i class="fa fa-pencil fa-fw w3-margin-right"></i>Written in C++</h6>
-	          <p>Lorem ipsum dolor sit amet. Praesentium magnam cndus iure, iste.</ponsectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repelle>
-	          <hr>
-	        </div>
-		</div>
-	    <!-- End Right Column -->
-	    </div>
-	    
-	  <!-- End Grid -->
-	  </div>
-	  
-	  <!-- End Page Container -->
-	</div>
-
-	<footer class="w3-container w3-teal w3-center w3-margin-top">
-	  <p>Find me on social media.</p>
-	  <a href="https://web.facebook.com/wfrdee"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
-	  <a href="https://www.instagram.com/wfrdee/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-	<!--   <i class="fa fa-snapchat w3-hover-opacity"></i>
-	  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-	  <i class="fa fa-twitter w3-hover-opacity"></i>
-	  <i class="fa fa-linkedin w3-hover-opacity"></i> -->
-	  <p>Powered by <a href="https://web.facebook.com/babblefour" target="_blank">HalfByte</a></p>
-	</footer>
-	<script type="text/javascript" src="js/particles.js"></script>
+    function t(a) {
+      switch (a) {
+        case 1:
+          client.playTorrent('magnet:?xt=urn:btih:08ada5a7a6183aae1e09d831df6748d566095a10&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F&xs=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel.torrent')
+          break
+        case 2:
+          client.playTorrent('magnet:?xt=urn:btih:209c8226b299b308beaf2b9cd3fb49212dbd13ec&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F&xs=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Ftears-of-steel.torrent')
+          break
+        case 3:
+          client.playTorrent('magnet:?xt=urn:btih:CE9156EB497762F8B7577B71C0647A4B0C3423E1&tr=wss%3A%2F%2Ftracker.openwebtorrent.com')
+          break
+      }
+    }
+  </script>
 </body>
+
 </html>
