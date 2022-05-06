@@ -158,6 +158,7 @@
     client.on('offline-torrent', params => console.log('Player loaded an offline stored torrent!', params))
     client.on('no-files', params => console.error('Player couldnt find any playable video files!', params))
     client.on('no-peers', params => console.error('Player couldnt find any peers!', params))
+    client.on('getAnnounceOpts', params => console.log('Player wants to get announce opts!', params))
     const getQueryVar = (varName) => {
         var queryStr = unescape(window.location.search) + '&',
             regex = new RegExp('.*?[&\\?]' + varName + '=(.*?)&.*'),
@@ -167,6 +168,25 @@
     let tid = getQueryVar('tid')
     let poster = getQueryVar('poster')
     var trackers = [
+        'http://9.rarbg.com:2710/announce',
+        'http://announce.torrentsmd.com:6969/announce',
+        'http://bt.careland.com.cn:6969/announce',
+        'http://explodie.org:6969/announce',
+        'http://mgtracker.org:2710/announce',
+        'http://tracker.best-torrents.net:6969/announce',
+        'http://tracker.tfile.me/announce',
+        'http://tracker.torrenty.org:6969/announce',
+        'http://tracker1.wasabii.com.tw:6969/announce',
+        'udp://9.rarbg.com:2710/announce',
+        'udp://9.rarbg.me:2710/announce',
+        'udp://tracker.coppersurfer.tk:6969/announce',
+        'udp://exodus.desync.com:6969/announce',
+        'udp://open.demonii.com:1337/announce',
+        'udp://tracker.btzoo.eu:80/announce',
+        'udp://tracker.istole.it:80/announce',
+        'udp://tracker.openbittorrent.com:80/announce',
+        'udp://tracker.prq.to/announce',
+        'udp://tracker.publicbt.com:80/announce',
         'http://tracker2.wasabii.com.tw:6969/announce',
         'udp://tracker.sktorrent.net:6969/announce',
         'http://www.wareztorrent.com:80/announce',
