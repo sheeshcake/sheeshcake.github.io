@@ -1,595 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-  <!-- Flick Player
-    -uses Web Torrent
-    -fast Torrent Player
-    -uses WebRTC
-    -uses WebSockets
-    -uses WebAudio
-    -uses WebGL
-    -uses WebWorkers
-    -uses WebAssembly
-    -more torrent support
-     -->
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flick Player</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="lib/webtorrent-player.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="docs/logo.png">
-  <style>
-    :root {
-      font-size: 12px;
-    }
+<html>
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      background-color: #141416;
-      height: 100vh;
-      width: 100%;
-    }
-  </style>
+<head>
+    <link
+        href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic|Droid+Serif:400,700,400italic,700italic'
+        rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="styles/newspaper.css">
+    <title>Sheesh Cake - The Fucked Up Cake</title>
+    <meta name="viewport" content="width=device-width">
+
 </head>
 
 <body>
-  <span id=navNowPlaying></span>
-  <section id="player" class="torrent-player">
-    <video id="video" src=""></video>
-    <a href="#player" class="miniplayer"></a>
-    <div class="top">
-      <div data-name="nowPlaying" class="ctrl">
-      </div>
-      <div class='stats'>
-        <span class="ctrl material-icons" data-value="0" data-name="peers">
-          people
-        </span>
-        <span class="ctrl material-icons" data-value="0 B/s" data-name="downSpeed">
-          arrow_downward
-        </span>
-        <span class="ctrl material-icons" data-value="0 B/s" data-name="upSpeed">
-          arrow_upward
-        </span>
-      </div>
-      <a class="material-icons ctrl" title="Save File To Drive" data-name="downloadFile" href="" target="_blank">
-        get_app
-      </a>
-    </div>
-    <div class="middle">
-      <div class="ctrl" data-name="ppToggle"></div>
-      <span class="material-icons ctrl" data-name="playLast">
-        skip_previous
-      </span>
-      <span class="material-icons ctrl" data-name="rewind">
-        fast_rewind
-      </span>
-      <span class="material-icons ctrl" data-name="playPause">
-        play_arrow
-      </span>
-      <span class="material-icons ctrl" data-name="forward">
-        fast_forward
-      </span>
-      <span class="material-icons ctrl" data-name="playNext">
-        skip_next
-      </span>
-      <div data-name="bufferingDisplay">
-      </div>
-    </div>
-    <div class="bottom">
-      <span class="material-icons ctrl" title="Play/Pause [Space]" data-name="playPause">
-        play_arrow
-      </span>
-      <span class="material-icons ctrl" title="Next [N]" data-name="playNext">
-        skip_next
-      </span>
-      <span class="material-icons ctrl" title="Playlist [P]" data-name="openPlaylist">
-        playlist_play
-      </span>
-      <div class="volume">
-        <span class="material-icons ctrl" title="Mute [M]" data-name="toggleMute">
-          volume_up
-        </span>
-        <input class="ctrl" type="range" value="100" id="volume" step="any" data-name="setVolume">
-      </div>
-      <div class="audio-tracks popup">
-        <span class="material-icons ctrl" title="Audio Tracks [T]" disabled data-name="audioButton">
-          queue_music
-        </span>
-        <div class="popup-menu ctrl" data-name="selectAudio">
+    <div class="head">
+        <div class="headerobjectswrapper">
+            <div class="weatherforcastbox">
+                <span style="font-style: italic;">
+                    How do hurricanes see?
+                </span>
+                <br>
+                <span>With one eye!</span>
+            </div>
+            <header>MY PORTFOLIO? HHHMMM</header>
         </div>
-      </div>
-      <div class="ctrl" data-name="progressWrapper" data-elapsed="00:00" data-remaining="00:00">
-        <div>
-          <input class="ctrl" type="range" min="0" max="100" value="0" step="any" data-name="setProgress">
-          <img class="ctrl" data-elapsed="00:00" data-name="thumbnail">
-        </div>
-      </div>
-      <div class="subtitles popup">
-        <span class="material-icons ctrl" title="Subtitles [C]" disabled data-name="captionsButton">
-          subtitles
-        </span>
-        <div class="popup-menu ctrl" data-name="selectCaptions">
-        </div>
-      </div>
-      <span class="material-icons ctrl" title="Cast Video [P]" data-name="toggleCast" disabled>
-        cast
-      </span>
-      <span class="material-icons ctrl" title="Popout Window [P]" data-name="togglePopout">
-        picture_in_picture
-      </span>
-      <span class="material-icons ctrl" title="Theatre Mode [T]" data-name="toggleTheatre">
-        crop_16_9
-      </span>
-      <span class="material-icons ctrl" title="Fullscreen [F]" data-name="toggleFullscreen">
-        fullscreen
-      </span>
+
+        <div class="subhead">L.A,gun City- Thursday August 9, 2022 - Seven Pages</div>
     </div>
-  </section>
-  <script src="dist/bundle.js"></script>
-  <script>
-    const playerControls = {}
-    for (const item of document.getElementsByClassName('ctrl')) {
-      if (!playerControls[item.dataset.name]) {
-        playerControls[item.dataset.name] = item
-      } else {
-        playerControls[item.dataset.name] = [playerControls[item.dataset.name], item]
-      }
-    }
-    const client = new WebTorrentPlayer.default({
-      controls: playerControls,
-      video: video,
-      player: player,
-      burnIn: true,
-      seekTime: 2,
-      immerseTime: 10,
-      generateThumbnails: true,
-      visibilityLossPause: true
-    })
-    client.on('prev', params => console.log('User wants to play previous video!', params))
-    client.on('next', params => console.log('User wants to play next video!', params))
-    client.on('playlist', params => console.log('User wants to open playlist!', params))
-    client.on('watched', params => console.log('User watched current video!', params))
-    client.on('download-done', params => console.log('Player finished downloading a file!', params))
-    client.on('video-files', params => console.log('Player found video files!', params))
-    client.on('offline-torrent', params => console.log('Player loaded an offline stored torrent!', params))
-    client.on('no-files', params => console.error('Player couldnt find any playable video files!', params))
-    client.on('no-peers', params => console.error('Player couldnt find any peers!', params))
-    client.on('getAnnounceOpts', params => console.log('Player wants to get announce opts!', params))
-    const getQueryVar = (varName) => {
-        var queryStr = unescape(window.location.search) + '&',
-            regex = new RegExp('.*?[&\\?]' + varName + '=(.*?)&.*'),
-            val = queryStr.replace(regex, "$1");
-        return val === queryStr ? false : val;
-    }
-    let tid = getQueryVar('tid')
-    let poster = getQueryVar('poster')
-    var trackers = [
-      'udp://public.popcorn-tracker.org:6969/announce',
+    <div class="content">
+        <div class="collumns">
+            <div class="collumn">
+                <div class="head"><span class="headline hl3">When darkness overspreads my eyes</span>
+                    <p><span class="headline hl4">by JOHANN WOLFGANG VON GOETHE</span></p>
+                </div>
+                When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper
+                surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner
+                sanctuary, I throw myself down among the tall grass by the trickling stream;<p>and, as I lie close to
+                    the earth, a thousand unknown plants are noticed by me: when I hear the buzz of the little world
+                    among the stalks, and grow familiar with the countless indescribable forms of the insects and flies,
+                    then I feel the presence of the Almighty, who formed us in his own image, and the breath of that
+                    universal love which bears and sustains us, as it floats around us in an eternity of bliss; and
+                    then, my friend, when darkness overspreads my eyes, and heaven and earth seem to dwell in my soul
+                    and absorb its power, like the form of a beloved mistress, then I often think with longing, Oh,
+                    would I could describe these conceptions, could impress upon paper all that is living so full and
+                    warm within me, that it might be the mirror of my soul, as my soul is the mirror of the infinite
+                    God!</p>
+            </div>
+            <div class="collumn">
+                <div class="head"><span class="headline hl5">Give people courage</span>
+                    <p><span class="headline hl6">The crowd seemed to grow</span></p>
+                </div>
+                The sunset faded to twilight before anything further happened. The crowd far away on the left, towards
+                Woking, seemed to grow, and I heard now a faint murmur from it. The little knot of people towards
+                Chobham dispersed. There was scarcely an intimation of movement from the pit.</p>
+                <figure class="figure">
+                    <img class="media" src="http://i.giphy.com/PW7MoTD2d9pJK.gif" alt="">
+                    <figcaption class="figcaption">Hermine hoping for courage.</figcaption>
+                </figure>
+
+                <p>It was this, as much as anything, that gave people courage, and I suppose the new arrivals from
+                    Woking also helped to restore confidence. At any rate, as the dusk came on a slow, intermittent
+                    movement upon the sand pits began, a movement that seemed to gather force as the stillness of the
+                    evening about the cylinder remained unbroken. Vertical black figures in twos and threes would
+                    advance, stop, watch, and advance again, spreading out as they did so in a thin irregular crescent
+                    that promised to enclose the pit in its attenuated horns. I, too, on my side began to move towards
+                    the pit.</p>
+
+                <p>Then I saw some cabmen and others had walked boldly into the sand pits, and heard the clatter of
+                    hoofs and the gride of wheels. I saw a lad trundling off the barrow of apples. And then, within
+                    thirty yards of the pit, advancing from the direction of Horsell, I noted a little black knot of
+                    men, the foremost of whom was waving a white flag.</p>
+
+            </div>
+            <div class="collumn">
+                <div class="head"><span class="headline hl1">May the Force be with you</span>
+                    <p><span class="headline hl2">Let go your conscious self and act on instinct</span></p>
+                </div>Partially, but it also obeys your commands. Hey, Luke! May the Force be with you. I have traced
+                the Rebel spies to her. Now she is my only link to finding their secret base.</p>
+                <figure class="figure">
+                    <img class="media" src="http://i.giphy.com/4fDWVPMoSyhgc.gif" alt="">
+                    <figcaption class="figcaption">"This time, let go your conscious self and act on instinct."
+                    </figcaption>
+                </figure>
+                <p>Leave that to me. Send a distress signal, and inform the Senate that all on board were killed. <span
+                        class="citation">"Don't under&shy;estimate the Force. I suggest you try it again, Luke."</span>
+                    This time, let go your conscious self and act on instinct. In my experience, there is no such thing
+                    as luck. You're all clear, kid. Let's blow this thing and go home!</p>
+                <p>You don't believe in the Force, do you? Partially, but it also obeys your commands. The plans you
+                    refer to will soon be back in our hands. As you wish.</p>
+            </div>
+            <div class="collumn">
+                <div class="head"><span class="headline hl3">The buzz of the little world </span>
+                    <p><span class="headline hl4">A thousand unknown plants</span></p>
+                </div>
+                <p>I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never
+                    was a greater artist than now. When, while the lovely valley teems with vapour around me, and the
+                    meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray
+                    gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling
+                    stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me: when I hear
+                    the buzz of the little world among the stalks, and grow familiar with the countless indescribable
+                    forms of the insects and flies, then I feel the presence of the Almighty, who formed us in his own
+                    image, and the breath</p>
+            </div>
+            <div class="collumn">
+                <div class="head"><span class="headline hl1">It wasn't a dream </span>
+                    <p><span class="headline hl4">by FRANZ KAFKA</span></p>
+                </div>
+                <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed
+                    into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could
+                    see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was
+                    hardly able to cover it and seemed ready to slide off any moment. </p>
+
+                <p>His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he
+                    looked. "What's happened to me?" he thought. It wasn't a dream. His room, a proper human room
+                    although a little too small, lay peacefully between its four familiar walls. A collection of textile
+                    samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a
+                    picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.
+                    It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff
+                    that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the
+                    window at the dull weather. </p>
+            </div>
+        </div>
+    </div>
 
-      'http://104.28.1.30:8080/announce',
-
-      'http://104.28.16.69/announce',
-
-      'http://107.150.14.110:6969/announce',
-
-      'http://109.121.134.121:1337/announce',
-
-      'http://114.55.113.60:6969/announce',
-
-      'http://125.227.35.196:6969/announce',
-
-      'http://128.199.70.66:5944/announce',
-
-      'http://157.7.202.64:8080/announce',
-
-      'http://158.69.146.212:7777/announce',
-
-      'http://173.254.204.71:1096/announce',
-
-      'http://178.175.143.27/announce',
-
-      'http://178.33.73.26:2710/announce',
-
-      'http://182.176.139.129:6969/announce',
-
-      'http://185.5.97.139:8089/announce',
-
-      'http://188.165.253.109:1337/announce',
-
-      'http://194.106.216.222/announce',
-
-      'http://195.123.209.37:1337/announce',
-
-      'http://210.244.71.25:6969/announce',
-
-      'http://210.244.71.26:6969/announce',
-
-      'http://213.159.215.198:6970/announce',
-
-      'http://213.163.67.56:1337/announce',
-
-      'http://37.19.5.139:6969/announce',
-
-      'http://37.19.5.155:6881/announce',
-
-      'http://46.4.109.148:6969/announce',
-
-      'http://5.79.249.77:6969/announce',
-
-      'http://5.79.83.193:2710/announce',
-
-      'http://51.254.244.161:6969/announce',
-
-      'http://59.36.96.77:6969/announce',
-
-      'http://74.82.52.209:6969/announce',
-
-      'http://80.246.243.18:6969/announce',
-
-      'http://81.200.2.231/announce',
-
-      'http://85.17.19.180/announce',
-
-      'http://87.248.186.252:8080/announce',
-
-      'http://87.253.152.137/announce',
-
-      'http://91.216.110.47/announce',
-
-      'http://91.217.91.21:3218/announce',
-
-      'http://91.218.230.81:6969/announce',
-
-      'http://93.92.64.5/announce',
-
-      'http://atrack.pow7.com/announce',
-
-      'http://bt.henbt.com:2710/announce',
-
-      'http://bt.pusacg.org:8080/announce',
-
-      'http://bt2.careland.com.cn:6969/announce',
-
-      'http://explodie.org:6969/announce',
-
-      'http://mgtracker.org:2710/announce',
-
-      'http://mgtracker.org:6969/announce',
-
-      'http://open.acgtracker.com:1096/announce',
-
-      'http://open.lolicon.eu:7777/announce',
-
-      'http://open.touki.ru/announce.php',
-
-      'http://p4p.arenabg.ch:1337/announce',
-
-      'http://p4p.arenabg.com:1337/announce',
-
-      'http://pow7.com:80/announce',
-
-      'http://retracker.gorcomnet.ru/announce',
-
-      'http://retracker.krs-ix.ru/announce',
-
-      'http://retracker.krs-ix.ru:80/announce',
-
-      'http://secure.pow7.com/announce',
-
-      'http://t1.pow7.com/announce',
-
-      'http://t2.pow7.com/announce',
-
-      'http://thetracker.org:80/announce',
-
-      'http://torrent.gresille.org/announce',
-
-      'http://torrentsmd.com:8080/announce',
-
-      'http://tracker.aletorrenty.pl:2710/announce',
-
-      'http://tracker.baravik.org:6970/announce',
-
-      'http://tracker.bittor.pw:1337/announce',
-
-      'http://tracker.bittorrent.am/announce',
-
-      'http://tracker.calculate.ru:6969/announce',
-
-      'http://tracker.dler.org:6969/announce',
-
-      'http://tracker.dutchtracking.com/announce',
-
-      'http://tracker.dutchtracking.com:80/announce',
-
-      'http://tracker.dutchtracking.nl/announce',
-
-      'http://tracker.dutchtracking.nl:80/announce',
-
-      'http://tracker.edoardocolombo.eu:6969/announce',
-
-      'http://tracker.ex.ua/announce',
-
-      'http://tracker.ex.ua:80/announce',
-
-      'http://tracker.filetracker.pl:8089/announce',
-
-      'http://tracker.flashtorrents.org:6969/announce',
-
-      'http://tracker.grepler.com:6969/announce',
-
-      'http://tracker.internetwarriors.net:1337/announce',
-
-      'http://tracker.kicks-ass.net/announce',
-
-      'http://tracker.kicks-ass.net:80/announce',
-
-      'http://tracker.kuroy.me:5944/announce',
-
-      'http://tracker.mg64.net:6881/announce',
-
-      'http://tracker.opentrackr.org:1337/announce',
-
-      'http://tracker.skyts.net:6969/announce',
-
-      'http://tracker.tfile.me/announce',
-
-      'http://tracker.tiny-vps.com:6969/announce',
-
-      'http://tracker.tvunderground.org.ru:3218/announce',
-
-      'http://tracker.yoshi210.com:6969/announce',
-
-      'http://tracker1.wasabii.com.tw:6969/announce',
-
-      'http://tracker2.itzmx.com:6961/announce',
-
-      'http://tracker2.wasabii.com.tw:6969/announce',
-
-      'http://www.wareztorrent.com/announce',
-
-      'http://www.wareztorrent.com:80/announce',
-
-      'https://104.28.17.69/announce',
-
-      'https://www.wareztorrent.com/announce',
-
-      'udp://107.150.14.110:6969/announce',
-
-      'udp://109.121.134.121:1337/announce',
-
-      'udp://114.55.113.60:6969/announce',
-
-      'udp://128.199.70.66:5944/announce',
-
-      'udp://151.80.120.114:2710/announce',
-
-      'udp://168.235.67.63:6969/announce',
-
-      'udp://178.33.73.26:2710/announce',
-
-      'udp://182.176.139.129:6969/announce',
-
-      'udp://185.5.97.139:8089/announce',
-
-      'udp://185.86.149.205:1337/announce',
-
-      'udp://188.165.253.109:1337/announce',
-
-      'udp://191.101.229.236:1337/announce',
-
-      'udp://194.106.216.222:80/announce',
-
-      'udp://195.123.209.37:1337/announce',
-
-      'udp://195.123.209.40:80/announce',
-
-      'udp://208.67.16.113:8000/announce',
-
-      'udp://213.163.67.56:1337/announce',
-
-      'udp://37.19.5.155:2710/announce',
-
-      'udp://46.4.109.148:6969/announce',
-
-      'udp://5.79.249.77:6969/announce',
-
-      'udp://5.79.83.193:6969/announce',
-
-      'udp://51.254.244.161:6969/announce',
-
-      'udp://62.138.0.158:6969/announce',
-
-      'udp://62.212.85.66:2710/announce',
-
-      'udp://74.82.52.209:6969/announce',
-
-      'udp://85.17.19.180:80/announce',
-
-      'udp://89.234.156.205:80/announce',
-
-      'udp://9.rarbg.com:2710/announce',
-
-      'udp://9.rarbg.me:2780/announce',
-
-      'udp://9.rarbg.to:2730/announce',
-
-      'udp://91.218.230.81:6969/announce',
-
-      'udp://94.23.183.33:6969/announce',
-
-      'udp://bt.xxx-tracker.com:2710/announce',
-
-      'udp://eddie4.nl:6969/announce',
-
-      'udp://explodie.org:6969/announce',
-
-      'udp://mgtracker.org:2710/announce',
-
-      'udp://open.stealth.si:80/announce',
-
-      'udp://p4p.arenabg.com:1337/announce',
-
-      'udp://shadowshq.eddie4.nl:6969/announce',
-
-      'udp://shadowshq.yi.org:6969/announce',
-
-      'udp://torrent.gresille.org:80/announce',
-
-      'udp://tracker.aletorrenty.pl:2710/announce',
-
-      'udp://tracker.bittor.pw:1337/announce',
-
-      'udp://tracker.coppersurfer.tk:6969/announce',
-
-      'udp://tracker.eddie4.nl:6969/announce',
-
-      'udp://tracker.ex.ua:80/announce',
-
-      'udp://tracker.filetracker.pl:8089/announce',
-
-      'udp://tracker.flashtorrents.org:6969/announce',
-
-      'udp://tracker.grepler.com:6969/announce',
-
-      'udp://tracker.ilibr.org:80/announce',
-
-      'udp://tracker.internetwarriors.net:1337/announce',
-
-      'udp://tracker.kicks-ass.net:80/announce',
-
-      'udp://tracker.kuroy.me:5944/announce',
-
-      'udp://tracker.leechers-paradise.org:6969/announce',
-
-      'udp://tracker.mg64.net:2710/announce',
-
-      'udp://tracker.mg64.net:6969/announce',
-
-      'udp://tracker.opentrackr.org:1337/announce',
-
-      'udp://tracker.piratepublic.com:1337/announce',
-
-      'udp://tracker.sktorrent.net:6969/announce',
-
-      'udp://tracker.skyts.net:6969/announce',
-
-      'udp://tracker.tiny-vps.com:6969/announce',
-
-      'udp://tracker.yoshi210.com:6969/announce',
-
-      'udp://tracker2.indowebster.com:6969/announce',
-
-      'udp://tracker4.piratux.com:6969/announce',
-
-      'udp://zer0day.ch:1337/announce',
-
-      'udp://zer0day.to:1337/announce',
-      'http://9.rarbg.com:2710/announce',
-      'http://announce.torrentsmd.com:6969/announce',
-      'http://bt.careland.com.cn:6969/announce',
-      'http://explodie.org:6969/announce',
-      'http://mgtracker.org:2710/announce',
-      'http://tracker.best-torrents.net:6969/announce',
-      'http://tracker.tfile.me/announce',
-      'http://tracker.torrenty.org:6969/announce',
-      'http://tracker1.wasabii.com.tw:6969/announce',
-      'udp://9.rarbg.com:2710/announce',
-      'udp://9.rarbg.me:2710/announce',
-      'udp://tracker.coppersurfer.tk:6969/announce',
-      'udp://exodus.desync.com:6969/announce',
-      'udp://open.demonii.com:1337/announce',
-      'udp://tracker.btzoo.eu:80/announce',
-      'udp://tracker.istole.it:80/announce',
-      'udp://tracker.openbittorrent.com:80/announce',
-      'udp://tracker.prq.to/announce',
-      'udp://tracker.publicbt.com:80/announce',
-      'http://tracker2.wasabii.com.tw:6969/announce',
-      'udp://tracker.sktorrent.net:6969/announce',
-      'http://www.wareztorrent.com:80/announce',
-      'udp://bt.xxx-tracker.com:2710/announce',
-      'udp://tracker.eddie4.nl:6969/announce',
-
-      'udp://tracker.grepler.com:6969/announce',
-      'udp://tracker.mg64.net:2710/announce',
-      'udp://wambo.club:1337/announce',
-      'udp://tracker.dutchtracking.com:6969/announce',
-      'udp://tc.animereactor.ru:8082/announce',
-      'udp://tracker.justseed.it:1337/announce',
-      'udp://tracker.leechers-paradise.org:6969/announce',
-      'udp://tracker.opentrackr.org:1337/announce',
-      'https://open.kickasstracker.com:443/announce',
-      'udp://tracker.coppersurfer.tk:6969/announce',
-      'udp://open.stealth.si:80/announce',
-      'http://87.253.152.137/announce',
-
-      'http://91.216.110.47/announce',
-
-      'http://91.217.91.21:3218/announce',
-
-      'http://91.218.230.81:6969/announce',
-
-      'http://93.92.64.5/announce',
-
-      'http://atrack.pow7.com/announce',
-      'http://bt.henbt.com:2710/announce',
-      'http://bt.pusacg.org:8080/announce',
-      'https://tracker.bt-hash.com:443/announce',
-      'udp://tracker.leechers-paradise.org:6969',
-      'https://182.176.139.129:6969/announce',
-
-      'udp://zephir.monocul.us:6969/announce',
-      'https://tracker.dutchtracking.com:80/announce',
-      'https://grifon.info:80/announce',
-      'udp://tracker.kicks-ass.net:80/announce',
-      'udp://p4p.arenabg.com:1337/announce',
-      'udp://tracker.aletorrenty.pl:2710/announce',
-      'udp://tracker.sktorrent.net:6969/announce',
-      'udp://tracker.internetwarriors.net:1337/announce',
-      'https://tracker.parrotsec.org:443/announce',
-      'https://tracker.moxing.party:6969/announce',
-      'https://tracker.ipv6tracker.ru:80/announce',
-
-      'https://tracker.fastdownload.xyz:443/announce',
-      'udp://open.stealth.si:80/announce',
-      'https://gwp2-v19.rinet.ru:80/announce',
-      'https://tr.kxmp.cf:80/announce',
-      'https://explodie.org:6969/announce',
-      'udp://tracker.openbittorrent.com:80',
-      'udp://tracker.coppersurfer.tk:6969',
-      'udp://tracker.leechers-paradise.org:6969',
-      'udp://tracker.opentrackr.org:1337',
-      'udp://explodie.org:6969',
-      'udp://tracker.empire-js.us:1337',
-      'wss://tracker.btorrent.xyz',
-      'wss://tracker.sloppyta.co:443/announce',
-      'wss://tracker.openwebtorrent.com',
-      'udp://glotorrents.pw:6969/announce',
-      'udp://tracker.opentrackr.org:1337/announce',
-      'udp://torrent.gresille.org:80/announce',
-      'udp://tracker.openbittorrent.com:80',
-      'udp://tracker.coppersurfer.tk:6969',
-      'udp://tracker.leechers-paradise.org:6969',
-      'udp://p4p.arenabg.ch:1337',
-      'udp://tracker.internetwarriors.net:1337',
-      'udp://open.demonii.com:1337/announce',
-      'udp://public.popcorn-tracker.org:6969/announce',
-      'http://mgtracker.org:2710/announce',
-      'http://tracker.trackerfix.com:80/announce',
-      'udp://9.rarbg.me:2720/announce',
-      'udp://9.rarbg.to:2900/announce',
-      'udp://tracker.thinelephant.org:12710/announce',
-      'udp://tracker.slowcheetah.org:14780/announce',
-      'udp://tracker.zer0day.to:1337/announce',
-      'udp://tracker.leechers-paradise.org:6969/announce',
-      'udp://coppersurfer.tk:6969/announce'
-    ]
-    client.playTorrent(`magnet:?xt=urn:btih:${tid}&tr=${trackers.join('&tr=')}&ws=https://webtorrent.io/torrents/`)
-  </script>
 </body>
 
 </html>
