@@ -908,6 +908,7 @@ header .nav__next {
 }
 
 .h-hero {
+  z-index: 2;
   padding-top: 15em;
   padding-bottom: 7.5em
 }
@@ -942,7 +943,7 @@ header .nav__next {
 
 .h-hero__sub {
   top: -2.7em;
-  max-width: 14em
+  max-width: 25em
 }
 
 @media screen and (max-width: 990px) {
@@ -1560,16 +1561,112 @@ header .nav__next {
 }
 
 .background {
+  z-index: 1;
   position: absolute;
   background-color: burlywood;
-  top: -30%;
+  top: -20%;
   left: 55%;
   width: 45%;
   height: 80%;
+
 }
 
+.wrapall {
+  position: relative;
+  height: 100vh !important;
+}
+
+.background {
+  position: absolute;
+}
+
+.scroll-wrapper{
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.scroll {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  /* -webkit-mask-image: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent) */
+}
+
+.scroll1 {
+  --time: 80s;
+}
+.scroll2 {
+  --time: 70s;
+}
+.scroll3 {
+  --time: 90s;
+}
+.scroll4 {
+  --time: 100s;
+}
+
+.scroll div {
+  white-space: nowrap;
+  animation: scroll var(--time) linear infinite;
+  animation-delay: calc(var(--time)*-1);
+
+}
+
+.scroll div:nth-child(2) {
+  animation: scroll2 var(--time) linear infinite;
+  animation-delay: calc(var(--time)/-2);
+}
+
+@keyframes scroll {
+  0% {
+      transform: translateX(100%);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll2 {
+  0% {
+      transform: translateX(0);
+  }
+
+  100% {
+      transform: translateX(-200%);
+  }
+}
+
+.scroll div span {
+  display: inline-flex;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: #d4d4d4;
+  font-size: 10vw;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+.scroll div span:hover {
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
 .header {
   position: absolute !important;
   top: 0;
   width: 100%;
+}
+
+html {
+  --cursor-color: #333
+}
+
+html.dark-mode {
+  --cursor-color: #000
 }
