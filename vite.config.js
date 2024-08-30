@@ -5,7 +5,7 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/sheeshcake.github.io",
+  base: "/",
   resolve: {
       alias: {
           process: "process/browser",
