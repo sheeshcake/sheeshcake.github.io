@@ -12,12 +12,12 @@ const Hero = () => {
                     </h1>
                 </div>
                 <div class="h-hero__sub">
-                    <p>specialized in Web Development, Mobile App Development and Project Management</p>
+                    <p> specializing in Web Development, Mobile App Development, and Project Management. With a blend of technical expertise and strategic insight, I craft tailored solutions to bring your digital projects to life.</p>
                 </div>
             </div>
             <div class="h-hero__bottom">
             <div id="about" class="h-hero__text">
-                <p>Hi! I'm Wendale Franz R. Dy a software engineer based in the Philippines, with a degree of Computer Science.</p>
+                <p>Hello there! I'm Wendale Franz R. Dy, a seasoned software engineer with over 4 years of experience, committed to crafting innovative solutions and enhancing digital experiences.</p>
                 <a href="mailto:wendalefranz.dy@gmail.com" class="button">
                     <span class="button__text">Drop me a line</span>
                     <div class="button__icon">
