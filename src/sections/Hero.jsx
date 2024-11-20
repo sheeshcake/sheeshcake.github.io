@@ -17,7 +17,7 @@ const Hero = () => {
             </div>
             <div class="h-hero__bottom">
             <div id="about" class="h-hero__text">
-                <p>Hello there! I'm Wendale Franz R. Dy, a seasoned software engineer with over 4 years of experience, committed to crafting innovative solutions and enhancing digital experiences.</p>
+                <p>Hello there! I'm Wendale Franz R. Dy, a seasoned software engineer with over {Date.getYear() - 2020} years of experience, committed to crafting innovative solutions and enhancing digital experiences.</p>
                 <a href="mailto:wendalefranz.dy@gmail.com" class="button">
                     <span class="button__text">Drop me a line</span>
                     <div class="button__icon">
