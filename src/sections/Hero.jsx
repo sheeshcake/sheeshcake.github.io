@@ -37,7 +37,7 @@ const Hero = () => {
                 </a>
                 <br/>
                 <br/>
-                <a href="https://drive.google.com/file/d/1qwxRxSc96y7GoVciHRShU-BKfsgmWfsT/view?usp=drive_link" target="_blank" className="button">
+                <a href="https://drive.google.com/file/d/1I3BhOTZj4oI2yp7tqYpwiecQrnetmf0m/view?usp=sharing" target="_blank" className="button">
                     <span className="button__text">View CV</span>
                     <div className="button__icon">
                         <div className="button__icon__bg"></div>
@@ -70,7 +70,7 @@ const Hero = () => {
                     </a>
                 </li>
                 <li>
-                    <a href="https://drive.google.com/file/d/1qwxRxSc96y7GoVciHRShU-BKfsgmWfsT/view?usp=drive_link" target="_blank" className="text-link">
+                    <a href="https://drive.google.com/file/d/1I3BhOTZj4oI2yp7tqYpwiecQrnetmf0m/view?usp=sharing" target="_blank" className="text-link">
                         <span>My CV</span>
                     </a>
                 </li>
